@@ -25,7 +25,7 @@ def macth_image(image, template):  # マッチテンプレート画像作成
     w, h = g_template.shape[1::-1]
     result = cv2.matchTemplate(g_image, g_template, cv2.TM_CCOEFF_NORMED)
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-    return (min_val, max_val, min_loc, max_loc,g_template)
+    return (min_val, max_val, min_loc, max_loc,g_template,scale[best_scale])
 
     # top_left = max_loc
     # btm_right = (top_left[0] + w, top_left[1] + h)
@@ -67,5 +67,5 @@ if __name__ == '__main__':
         btm_right = (top_left[0] + w, top_left[1] + h)
         cv2.rectangle(image, top_left, btm_right, 255, 2)
 
-        st.image(image, caption=f"一致度：{result[1]}", use_column_width=True)
+        st.image(image, caption=f"一致度：{result[1]},縮尺：{result[5]}", use_column_width=True)
 
