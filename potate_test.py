@@ -4,12 +4,12 @@ from PIL import Image
 import cv2
 
 
-def macth_image(image, template):  # マッチテンプレート画像作成
+def macth_image(image, template):  # マッチした位置、スケール、一致度を返す
     height = template.shape[0]
     width = template.shape[1]
     g_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # グレースケール加工
     scale = [0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.05, 1.1, 1.15, 1.2, 1.25,
-             1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65, 1.7, 1.75, 1.8,2,2.4,2.8,3,3.5,4,4.5,5,5.5
+             1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65, 1.7, 1.75, 1.8,2,2.4,2.8,3,3.5,4,4.5,5,5.5,6,7,8,9
              ]
     rank = []
     for i in scale:  # scaleのパターンだけ縮小→拡大し、最もマッチする値を選ぶ
