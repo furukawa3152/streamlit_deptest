@@ -52,6 +52,8 @@ if __name__ == '__main__':
         image = Image.open(uploaded_file)
         image = np.array(image.convert("RGB"))
         image = cv2.cvtColor(image, 1)
+        if image.shape[0] > 1500:#大きい画像（height>1500）は小さくして検証
+            image = cv2.resize(image,(1280,960))
         tmp = cv2.imread("potato_boy8.jpg")
 
         image = four_patern_test(image,tmp)
