@@ -55,6 +55,7 @@ if __name__ == '__main__':
         if image.shape[0] > 1500:#大きい画像（height>1500）は小さくして検証
             image = cv2.resize(image,(1280,960))
         tmp = cv2.imread("potato_boy8.jpg")
+        image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
 
         # image = four_patern_test(image,tmp)
 
