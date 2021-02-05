@@ -56,7 +56,7 @@ if __name__ == '__main__':
             image = cv2.resize(image,(1280,960))
         tmp = cv2.imread("potato_boy8.jpg")
 
-        image = four_patern_test(image,tmp)
+        # image = four_patern_test(image,tmp)
 
         result = macth_image(image, tmp)
         w, h = result[4].shape[1::-1]
