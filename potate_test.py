@@ -64,8 +64,14 @@ if __name__ == '__main__':
         top_left = (result[3][0]-w,result[3][1]-h)
         btm_right = (top_left[0] + int(w*2.5), top_left[1] + h*3)
         cv2.rectangle(image, top_left, btm_right, 255, 2)
+        if result[1] >= 0.45:
+            text = "GET!!!"
+        elif result[1] >= 0.3:
+            text = "maybe.."
+        else:
+            text = "Hmm.."
 
-        cv2.putText(image, "HERE!!!", (top_left[0],top_left[1]), cv2.FONT_HERSHEY_PLAIN,
+        cv2.putText(image, text, (top_left[0],top_left[1]), cv2.FONT_HERSHEY_PLAIN,
                     4, (255,0,0),5,cv2.LINE_AA)
 
         st.image(image, caption=f"一致度：{result[1]},縮尺：{result[5]}", use_column_width=True)
