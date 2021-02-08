@@ -8,8 +8,8 @@ def macth_image(image, template):  # マッチした位置、スケール、一�
     height = template.shape[0]
     width = template.shape[1]
     g_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # グレースケール加工
-    scale = [0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.05, 1.1, 1.15, 1.2, 1.25,
-             1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65, 1.7, 1.75, 1.8,2,2.3,2.6,2.8,3,3.2]
+    scale = [0.2,0.25,0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.05, 1.1, 1.15, 1.2, 1.25,
+             1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65, 1.7, 1.75, 1.8,2,2.3,2.6,2.8,3,3.2,3.5]
     rank = []
     for i in scale:  # scaleのパターンだけ縮小→拡大し、最もマッチする値を選ぶ
         g_template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
@@ -45,6 +45,15 @@ def four_patern_test(image, template):  # 0度、90度、180度、270度回転�
 
 if __name__ == '__main__':
     st.title("じゃがいも野郎を探すぜ！")
+    """
+    **~Let`s Get POTATE-BOY!!!~**
+    """
+    # st.write("~Let`s Get POTATE-BOY!!!~")
+    jaga = Image.open("jagaimoyarou.jpg")
+    jaga = np.array(jaga.convert("RGB"))
+    jaga = cv2.cvtColor(jaga, 1)
+
+    st.image(jaga,use_column_width=False)
 
     uploaded_file = st.file_uploader("ここから画像を入れてね", type="jpg")
 
