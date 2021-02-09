@@ -61,14 +61,30 @@ if __name__ == '__main__':
         image = Image.open(uploaded_file)
         image = np.array(image.convert("RGB"))
         image = cv2.cvtColor(image, 1)
-        if image.shape[0] > 1500:#大きい画像（height>1500）は小さくして検証
-            image = cv2.resize(image,(1280,960))
-        tmp = cv2.imread("potato_boy8.jpg")
+        if image.shape[0] > 1000:#大きい画像（height>1500）は小さくして検証
+            image = cv2.resize(image,(440,320))
+        # tmp = cv2.imread("potato_boy8.jpg")
+
+        tmp = Image.open("potato_boy8.jpg")
+
+
+
         image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
 
         # image = four_patern_test(image,tmp)
+        result_list = []
+        max_list =[]
+        for i in range(-3,3):#傾き実装
+            tmp_arg = tmp.rotate(i*3)
+            tmp_arg = np.array(tmp_arg.convert("RGB"))
+            tmp_arg = cv2.cvtColor(tmp_arg, 1)
+            arg_result=macth_image(image,tmp_arg)
+            result_list.append(arg_result)
+            max_list.append(arg_result[1])
 
-        result = macth_image(image, tmp)
+        result = result_list[np.argmax(max_list)]
+
+        # result = macth_image(image, tmp)
         w, h = result[4].shape[1::-1]
         top_left = (result[3][0]-w,result[3][1]-h)
         btm_right = (top_left[0] + int(w*2.5), top_left[1] + h*3)
@@ -83,5 +99,5 @@ if __name__ == '__main__':
         cv2.putText(image, text, (top_left[0],top_left[1]), cv2.FONT_HERSHEY_PLAIN,
                     4, (255,0,0),5,cv2.LINE_AA)
 
-        st.image(image, caption=f"一致度：{result[1]},縮尺：{result[5]}", use_column_width=True)
+        st.image(image, caption=f"一致度：{result[1]},縮尺：{result[5]},傾き：{np.argmax(max_list)}", use_column_width=True)
 
