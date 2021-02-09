@@ -62,7 +62,7 @@ if __name__ == '__main__':
         image = np.array(image.convert("RGB"))
         image = cv2.cvtColor(image, 1)
         if image.shape[0] > 1000:#大きい画像（height>1500）は小さくして検証
-            image = cv2.resize(image,(440,320))
+            image = cv2.resize(image,(960,720))
         # tmp = cv2.imread("potato_boy8.jpg")
 
         tmp = Image.open("potato_boy8.jpg")
