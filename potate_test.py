@@ -61,7 +61,7 @@ if __name__ == '__main__':
         image = Image.open(uploaded_file)
         image = np.array(image.convert("RGB"))
         image = cv2.cvtColor(image, 1)
-        if image.shape[0] > 1000:#大きい画像（height>1500）は小さくして検証
+        if image.shape[0] > 960:#大きい画像（height>960）は小さくして検証
             image = cv2.resize(image,(960,720))
         # tmp = cv2.imread("potato_boy8.jpg")
 
@@ -74,7 +74,7 @@ if __name__ == '__main__':
         # image = four_patern_test(image,tmp)
         result_list = []
         max_list =[]
-        for i in range(-3,3):#傾き実装
+        for i in range(-3,4):#傾き実装
             tmp_arg = tmp.rotate(i*3)
             tmp_arg = np.array(tmp_arg.convert("RGB"))
             tmp_arg = cv2.cvtColor(tmp_arg, 1)
