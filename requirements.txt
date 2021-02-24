@@ -1,4 +1,5 @@
 streamlit
 numpy
 opencv-contrib-python-headless
+mtcnn
 
