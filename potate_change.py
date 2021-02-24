@@ -37,3 +37,4 @@ if __name__ == '__main__':
 
         st.image(face_detect_MTCNN(image))
 
+
