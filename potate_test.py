@@ -29,33 +29,32 @@ def macth_image(image, template):  # マッチした位置、スケール、一�
 
 
 
-def four_patern_test(image, template):  # 0度、90度、180度、270度回転の4パターンから最もマッチするものを出力
-    image1 = image
-    image2 = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
-    image3 = cv2.rotate(image, cv2.ROTATE_180)
-    image4 = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
-    img_list = [image1, image2, image3, image4]
-    res1 = macth_image(image1, tmp)[1]
-    res2 = macth_image(image2, tmp)[1]
-    res3 = macth_image(image3, tmp)[1]
-    res4 = macth_image(image4, tmp)[1]
-    res_list = [res1, res2, res3, res4]
-    return img_list[np.argmax(res_list)]
+# def four_patern_test(image, template):  # 0度、90度、180度、270度回転の4パターンから最もマッチするものを出力
+#     image1 = image
+#     image2 = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
+#     image3 = cv2.rotate(image, cv2.ROTATE_180)
+#     image4 = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+#     img_list = [image1, image2, image3, image4]
+#     res1 = macth_image(image1, tmp)[1]
+#     res2 = macth_image(image2, tmp)[1]
+#     res3 = macth_image(image3, tmp)[1]
+#     res4 = macth_image(image4, tmp)[1]
+#     res_list = [res1, res2, res3, res4]
+#     return img_list[np.argmax(res_list)]
 
 
 if __name__ == '__main__':
-    st.title("じゃがいも野郎を探すぜ！")
+    st.title("ジャガイモ野郎を探すぜ！")
     """
     **~Let`s Get POTATE-BOY!!!~**
     """
-    # st.write("~Let`s Get POTATE-BOY!!!~")
     jaga = Image.open("jagaimoyarou.jpg")
     jaga = np.array(jaga.convert("RGB"))
     jaga = cv2.cvtColor(jaga, 1)
 
     st.image(jaga,use_column_width=False)
 
-    uploaded_file = st.file_uploader("ここから画像を入れてね", type="jpg")
+    uploaded_file = st.file_uploader("ここから画像を入れてね", type=["png", "jpg","jpeg"])
 
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
@@ -66,9 +65,6 @@ if __name__ == '__main__':
         # tmp = cv2.imread("potato_boy8.jpg")
 
         tmp = Image.open("potato_boy8.jpg")
-
-
-
         image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
 
         # image = four_patern_test(image,tmp)
