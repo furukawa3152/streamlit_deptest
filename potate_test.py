@@ -49,16 +49,16 @@ if __name__ == '__main__':
     **~Let`s Get POTATE-BOY!!!~**
     """
     jaga = Image.open("jagaimoyarou.jpg")
-    jaga = np.array(jaga.convert("RGB"))
+    jaga = np.array(jaga.convert("RGB"))#色が反転して表示されたため加工。
     jaga = cv2.cvtColor(jaga, 1)
 
     st.image(jaga, use_column_width=False)
 
     uploaded_file = st.file_uploader("ここから画像を入れてね", type=["png", "jpg", "jpeg"])
 
-    if uploaded_file is not None:
+    if uploaded_file is not None:#画像が読み込まれたら処理を開始
         image = Image.open(uploaded_file)
-        image = np.array(image.convert("RGB"))
+        image = np.array(image.convert("RGB"))#opencvで処理するために配列に変換。
         image = cv2.cvtColor(image, 1)
         if image.shape[0] > 960:  # 大きい画像（height>960）は小さくして検証
             image = cv2.resize(image, (960, 720))
