@@ -97,45 +97,45 @@ if __name__ == '__main__':
 
         st.image(image, caption=f"一致度：{result[1]},縮尺：{result[5]},傾き：{np.argmax(max_list)}", use_column_width=True)
 
-        uploaded_file = st.file_uploader("回転してしまうときはこちらから", type=["png", "jpg", "jpeg"])
+    uploaded_file2 = st.file_uploader("回転してしまうときはこちらから", type=["png", "jpg", "jpeg"])
 
-        if uploaded_file is not None:  # 画像が読み込まれたら処理を開始
-            image = Image.open(uploaded_file)
-            image = np.array(image.convert("RGB"))  # opencvで処理するために配列に変換。
-            image = cv2.cvtColor(image, 1)
-            if image.shape[0] > 960:  # 大きい画像（height>960）は小さくして検証
-                image = cv2.resize(image, (960, 720))
-            # tmp = cv2.imread("potato_boy8.jpg")
+    if uploaded_file2 is not None:  # 画像が読み込まれたら処理を開始
+        image = Image.open(uploaded_file2)
+        image = np.array(image.convert("RGB"))  # opencvで処理するために配列に変換。
+        image = cv2.cvtColor(image, 1)
+        if image.shape[0] > 960:  # 大きい画像（height>960）は小さくして検証
+            image = cv2.resize(image, (960, 720))
+        # tmp = cv2.imread("potato_boy8.jpg")
 
-            tmp = Image.open("potato_boy8.jpg")
+        tmp = Image.open("potato_boy8.jpg")
 
 
-            # image = four_patern_test(image,tmp)
-            result_list = []
-            max_list = []
-            for i in range(-3, 4):  # 傾き実装
-                tmp_arg = tmp.rotate(i * 3)
-                tmp_arg = np.array(tmp_arg.convert("RGB"))
-                tmp_arg = cv2.cvtColor(tmp_arg, 1)
-                arg_result = macth_image(image, tmp_arg)
-                result_list.append(arg_result)
-                max_list.append(arg_result[1])
+        # image = four_patern_test(image,tmp)
+        result_list = []
+        max_list = []
+        for i in range(-3, 4):  # 傾き実装
+            tmp_arg = tmp.rotate(i * 3)
+            tmp_arg = np.array(tmp_arg.convert("RGB"))
+            tmp_arg = cv2.cvtColor(tmp_arg, 1)
+            arg_result = macth_image(image, tmp_arg)
+            result_list.append(arg_result)
+            max_list.append(arg_result[1])
 
-            result = result_list[np.argmax(max_list)]
+        result = result_list[np.argmax(max_list)]
 
-            # result = macth_image(image, tmp)
-            w, h = result[4].shape[1::-1]
-            top_left = (result[3][0] - w, result[3][1] - h)
-            btm_right = (top_left[0] + int(w * 2.5), top_left[1] + h * 3)
-            cv2.rectangle(image, top_left, btm_right, 255, 2)
-            if result[1] >= 0.45:
-                text = "GET!!!"
-            elif result[1] >= 0.3:
-                text = "maybe.."
-            else:
-                text = "Hmm.."
+        # result = macth_image(image, tmp)
+        w, h = result[4].shape[1::-1]
+        top_left = (result[3][0] - w, result[3][1] - h)
+        btm_right = (top_left[0] + int(w * 2.5), top_left[1] + h * 3)
+        cv2.rectangle(image, top_left, btm_right, 255, 2)
+        if result[1] >= 0.45:
+            text = "GET!!!"
+        elif result[1] >= 0.3:
+            text = "maybe.."
+        else:
+            text = "Hmm.."
 
-            cv2.putText(image, text, (top_left[0], top_left[1]), cv2.FONT_HERSHEY_PLAIN,
-                        4, (255, 0, 0), 5, cv2.LINE_AA)
+        cv2.putText(image, text, (top_left[0], top_left[1]), cv2.FONT_HERSHEY_PLAIN,
+                    4, (255, 0, 0), 5, cv2.LINE_AA)
 
-            st.image(image, caption=f"一致度：{result[1]},縮尺：{result[5]},傾き：{np.argmax(max_list)}", use_column_width=True)
+        st.image(image, caption=f"一致度：{result[1]},縮尺：{result[5]},傾き：{np.argmax(max_list)}", use_column_width=True)
